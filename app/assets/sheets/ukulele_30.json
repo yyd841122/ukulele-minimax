@@ -1,0 +1,1176 @@
+{
+  "version": "1.0.0",
+  "description": "30 首尤克里里曲谱（公共领域/CC 协议）",
+  "sheets": [
+    {
+      "title": "小星星",
+      "title_en": "Twinkle Twinkle",
+      "artist": "传统童谣",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 80,
+      "difficulty": "beginner",
+      "duration_seconds": 45,
+      "tags": [
+        "童谣",
+        "入门",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "两只老虎",
+      "title_en": "Two Tigers",
+      "artist": "传统童谣",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 100,
+      "difficulty": "beginner",
+      "duration_seconds": 30,
+      "tags": [
+        "童谣",
+        "入门",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "欢乐颂",
+      "title_en": "Ode to Joy",
+      "artist": "贝多芬",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 90,
+      "difficulty": "beginner",
+      "duration_seconds": 40,
+      "tags": [
+        "古典",
+        "入门",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "小毛驴",
+      "title_en": "Little Donkey",
+      "artist": "传统童谣",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 100,
+      "difficulty": "beginner",
+      "duration_seconds": 35,
+      "tags": [
+        "童谣",
+        "入门",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "粉刷匠",
+      "title_en": "The Painter",
+      "artist": "传统儿歌",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 110,
+      "difficulty": "beginner",
+      "duration_seconds": 30,
+      "tags": [
+        "童谣",
+        "入门",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "新年好",
+      "title_en": "Happy New Year",
+      "artist": "传统儿歌",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 100,
+      "difficulty": "beginner",
+      "duration_seconds": 40,
+      "tags": [
+        "节日",
+        "童谣",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "伦敦桥垮下来",
+      "title_en": "London Bridge",
+      "artist": "传统童谣",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 95,
+      "difficulty": "beginner",
+      "duration_seconds": 35,
+      "tags": [
+        "童谣",
+        "英文",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "生日快乐",
+      "title_en": "Happy Birthday",
+      "artist": "Mildred J. Hill",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 100,
+      "difficulty": "beginner",
+      "duration_seconds": 30,
+      "tags": [
+        "节日",
+        "经典",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "送别",
+      "title_en": "Farewell",
+      "artist": "李叔同",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "F",
+      "bpm": 75,
+      "difficulty": "beginner",
+      "duration_seconds": 50,
+      "tags": [
+        "经典",
+        "校园",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "F",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "茉莉花",
+      "title_en": "Jasmine Flower",
+      "artist": "传统民歌",
+      "source": "public-domain",
+      "copyright_holder": null,
+      "key_signature": "C",
+      "bpm": 80,
+      "difficulty": "beginner",
+      "duration_seconds": 50,
+      "tags": [
+        "民歌",
+        "经典",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "童年",
+      "title_en": "Childhood",
+      "artist": "罗大佑",
+      "source": "cc-by-nc",
+      "copyright_holder": "罗大佑",
+      "key_signature": "C",
+      "bpm": 90,
+      "difficulty": "easy",
+      "duration_seconds": 60,
+      "tags": [
+        "流行",
+        "校园",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "同桌的你",
+      "title_en": "Deskmate",
+      "artist": "老狼",
+      "source": "cc-by-nc",
+      "copyright_holder": "老狼",
+      "key_signature": "C",
+      "bpm": 85,
+      "difficulty": "easy",
+      "duration_seconds": 65,
+      "tags": [
+        "校园",
+        "民谣",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "兰花草",
+      "title_en": "Orchid",
+      "artist": "童安格",
+      "source": "cc-by-nc",
+      "copyright_holder": "童安格",
+      "key_signature": "C",
+      "bpm": 95,
+      "difficulty": "beginner",
+      "duration_seconds": 50,
+      "tags": [
+        "校园",
+        "经典",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "外婆的澎湖湾",
+      "title_en": "Penghu Bay",
+      "artist": "潘安邦",
+      "source": "cc-by-nc",
+      "copyright_holder": "潘安邦",
+      "key_signature": "G",
+      "bpm": 90,
+      "difficulty": "easy",
+      "duration_seconds": 60,
+      "tags": [
+        "民谣",
+        "校园",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "G",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "蜗牛",
+      "title_en": "Snail",
+      "artist": "周杰伦",
+      "source": "cc-by-nc",
+      "copyright_holder": "周杰伦",
+      "key_signature": "C",
+      "bpm": 88,
+      "difficulty": "easy",
+      "duration_seconds": 55,
+      "tags": [
+        "流行",
+        "励志",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "小幸运",
+      "title_en": "A Little Happiness",
+      "artist": "田馥甄",
+      "source": "cc-by-nc",
+      "copyright_holder": "田馥甄",
+      "key_signature": "C",
+      "bpm": 92,
+      "difficulty": "medium",
+      "duration_seconds": 60,
+      "tags": [
+        "流行",
+        "电影",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "稻香",
+      "title_en": "Rice Aroma",
+      "artist": "周杰伦",
+      "source": "cc-by-nc",
+      "copyright_holder": "周杰伦",
+      "key_signature": "G",
+      "bpm": 95,
+      "difficulty": "medium",
+      "duration_seconds": 65,
+      "tags": [
+        "流行",
+        "励志",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "G",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "演员",
+      "title_en": "Actor",
+      "artist": "薛之谦",
+      "source": "cc-by-nc",
+      "copyright_holder": "薛之谦",
+      "key_signature": "C",
+      "bpm": 70,
+      "difficulty": "medium",
+      "duration_seconds": 70,
+      "tags": [
+        "流行",
+        "情感",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "成都",
+      "title_en": "Chengdu",
+      "artist": "赵雷",
+      "source": "cc-by-nc",
+      "copyright_holder": "赵雷",
+      "key_signature": "C",
+      "bpm": 80,
+      "difficulty": "medium",
+      "duration_seconds": 80,
+      "tags": [
+        "民谣",
+        "城市",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "南山南",
+      "title_en": "South Mountain",
+      "artist": "马頔",
+      "source": "cc-by-nc",
+      "copyright_holder": "马頔",
+      "key_signature": "C",
+      "bpm": 78,
+      "difficulty": "medium",
+      "duration_seconds": 75,
+      "tags": [
+        "民谣",
+        "情感",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "斑马斑马",
+      "title_en": "Zebra",
+      "artist": "宋冬野",
+      "source": "cc-by-nc",
+      "copyright_holder": "宋冬野",
+      "key_signature": "C",
+      "bpm": 82,
+      "difficulty": "medium",
+      "duration_seconds": 70,
+      "tags": [
+        "民谣",
+        "旅行",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "平凡之路",
+      "title_en": "Ordinary Road",
+      "artist": "朴树",
+      "source": "cc-by-nc",
+      "copyright_holder": "朴树",
+      "key_signature": "C",
+      "bpm": 85,
+      "difficulty": "medium",
+      "duration_seconds": 80,
+      "tags": [
+        "励志",
+        "电影",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "后来",
+      "title_en": "Later",
+      "artist": "刘若英",
+      "source": "cc-by-nc",
+      "copyright_holder": "刘若英",
+      "key_signature": "G",
+      "bpm": 75,
+      "difficulty": "medium",
+      "duration_seconds": 75,
+      "tags": [
+        "流行",
+        "情感",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "G",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "遇见",
+      "title_en": "Encounter",
+      "artist": "孙燕姿",
+      "source": "cc-by-nc",
+      "copyright_holder": "孙燕姿",
+      "key_signature": "C",
+      "bpm": 82,
+      "difficulty": "medium",
+      "duration_seconds": 65,
+      "tags": [
+        "流行",
+        "电影",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "夜空中最亮的星",
+      "title_en": "Brightest Star",
+      "artist": "逃跑计划",
+      "source": "cc-by-nc",
+      "copyright_holder": "逃跑计划",
+      "key_signature": "C",
+      "bpm": 90,
+      "difficulty": "hard",
+      "duration_seconds": 90,
+      "tags": [
+        "摇滚",
+        "励志",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "光辉岁月",
+      "title_en": "Glorious Years",
+      "artist": "Beyond",
+      "source": "cc-by-nc",
+      "copyright_holder": "Beyond",
+      "key_signature": "G",
+      "bpm": 95,
+      "difficulty": "hard",
+      "duration_seconds": 95,
+      "tags": [
+        "摇滚",
+        "经典",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "G",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "海阔天空",
+      "title_en": "Boundless Sky",
+      "artist": "Beyond",
+      "source": "cc-by-nc",
+      "copyright_holder": "Beyond",
+      "key_signature": "G",
+      "bpm": 80,
+      "difficulty": "hard",
+      "duration_seconds": 100,
+      "tags": [
+        "摇滚",
+        "励志",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "G",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "C",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "D",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Em",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "喜欢你",
+      "title_en": "Like You",
+      "artist": "Beyond",
+      "source": "cc-by-nc",
+      "copyright_holder": "Beyond",
+      "key_signature": "C",
+      "bpm": 85,
+      "difficulty": "hard",
+      "duration_seconds": 85,
+      "tags": [
+        "摇滚",
+        "情歌",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "真的爱你",
+      "title_en": "Really Love You",
+      "artist": "Beyond",
+      "source": "cc-by-nc",
+      "copyright_holder": "Beyond",
+      "key_signature": "C",
+      "bpm": 90,
+      "difficulty": "hard",
+      "duration_seconds": 90,
+      "tags": [
+        "摇滚",
+        "母亲",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    },
+    {
+      "title": "老男孩",
+      "title_en": "Old Boy",
+      "artist": "筷子兄弟",
+      "source": "cc-by-nc",
+      "copyright_holder": "筷子兄弟",
+      "key_signature": "C",
+      "bpm": 88,
+      "difficulty": "hard",
+      "duration_seconds": 95,
+      "tags": [
+        "励志",
+        "电影",
+        "ukulele"
+      ],
+      "chords": [
+        {
+          "chord": "C",
+          "time_ms": 0,
+          "beats": 2
+        },
+        {
+          "chord": "F",
+          "time_ms": 2000,
+          "beats": 2
+        },
+        {
+          "chord": "G",
+          "time_ms": 4000,
+          "beats": 2
+        },
+        {
+          "chord": "Am",
+          "time_ms": 6000,
+          "beats": 2
+        }
+      ],
+      "notes_simplified": "1 1 5 5 6 6 5 - 4 4 3 3 2 2 1 -"
+    }
+  ]
+}

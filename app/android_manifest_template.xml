@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Android 权限说明（自研 AI 音乐学园 App）
+    本文件由 `flutter create` 生成后会被覆盖关键权限部分。
+    完整文件请使用 `flutter create -t app --platforms=android .` 自动生成，
+    然后把以下权限合并到 AndroidManifest.xml 的 <manifest> 节点下。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 关键权限：麦克风录音（调音器、AI 陪练都需要） -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- 网络（后端 API 调用） -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 蓝牙（智能硬件 - 尤克里里 MIDI 配对，二期） -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+
+    <!-- 存储（用户上传曲谱/扒谱音频，二期） -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+
+    <!-- 摄像头（录屏功能，二期） -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:label="AI 音乐学园"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+    </application>
+</manifest>

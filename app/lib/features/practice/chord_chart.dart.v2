@@ -1,0 +1,328 @@
+/// 尤克里里指法图（完整重写版）
+///
+/// 设计原则：
+/// 1. 输入只接受 (chordName, isSingleMode)
+/// 2. 数据计算和 UI 渲染严格分离
+/// 3. 不嵌套 CustomPaint 的 child，避开 shouldRepaint 缓存陷阱
+/// 4. 一个文件，一个 widget 树
+library;
+
+import 'package:flutter/material.dart';
+
+// ============== 数据层 ==============
+
+/// 弦索引约定
+///   s=0: 4 弦 (G) — 最左
+///   s=1: 3 弦 (C)
+///   s=2: 2 弦 (E)
+///   s=3: 1 弦 (A) — 最右
+
+/// 和弦指法数据库（4 根弦 + 4 个品位）
+const Map<String, _Chord> _chords = {
+  'C': _Chord(fingerings: [0, 0, 0, 3]),
+  'Am': _Chord(fingerings: [0, 0, 0, 0]),
+  'F': _Chord(fingerings: [2, 0, 1, 0]),
+  'G': _Chord(fingerings: [0, 2, 3, 2]),
+};
+
+/// 单音指法数据库（只按一根弦）
+const Map<String, _Chord> _singleNotes = {
+  'C': _Chord(fingerings: [null, null, null, 3]),  // 1 弦 3 品
+  'D': _Chord(fingerings: [null, null, 2, null]),  // 2 弦 2 品
+  'E': _Chord(fingerings: [null, null, 0, null]),  // 2 弦空弦
+  'F': _Chord(fingerings: [1, null, null, null]),  // 4 弦 1 品
+  'G': _Chord(fingerings: [0, null, null, null]),  // 4 弦空弦
+  'A': _Chord(fingerings: [null, null, null, 0]),  // 1 弦空弦
+  'B': _Chord(fingerings: [2, null, null, null]),  // 4 弦 2 品
+};
+
+class _Chord {
+  const _Chord({required this.fingerings});
+  /// [null] = 不弹
+  /// [0] = 空弦
+  /// [1-4] = 品位
+  final List<int?> fingerings;
+}
+
+/// 解析 chord 名 → 拿指法
+_Chord _resolve(String chord, bool isSingle) {
+  // 单音模式：用根音查 _singleNotes
+  if (isSingle) {
+    final root = chord.isEmpty ? '' : chord[0];
+    final c = _singleNotes[root];
+    if (c != null) return c;
+  }
+  // 和弦模式：直接查
+  final c = _chords[chord];
+  if (c != null) return c;
+  // 单音回退（短名当单音）
+  if (chord.length == 1) {
+    final c = _singleNotes[chord];
+    if (c != null) return c;
+  }
+  // 找不到：返回全 null（不弹）
+  return const _Chord(fingerings: [null, null, null, null]);
+}
+
+// ============== UI 层 ==============
+
+class ChordChart extends StatelessWidget {
+  const ChordChart({
+    super.key,
+    required this.chord,
+    this.isSingle = false,
+  });
+
+  /// 和弦名（如 "C" / "Am" / "F"）
+  final String chord;
+
+  /// 是否为单音练习模式
+  final bool isSingle;
+
+  @override
+  Widget build(BuildContext context) {
+    final data = _resolve(chord, isSingle);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          _ZeroFretRow(fingerings: data.fingerings),
+          const SizedBox(height: 4),
+          Expanded(child: _Fretboard(fingerings: data.fingerings)),
+          const SizedBox(height: 4),
+          _StringLabels(),
+        ],
+      ),
+    );
+  }
+}
+
+/// 0 品行：×  ○  ×  ×
+class _ZeroFretRow extends StatelessWidget {
+  const _ZeroFretRow({required this.fingerings});
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 22,
+      child: Row(
+        children: <Widget>[
+          for (int s = 0; s < 4; s++)
+            Expanded(
+              child: _ZeroMark(value: fingerings[s]),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ZeroMark extends StatelessWidget {
+  const _ZeroMark({required this.value});
+  final int? value;
+
+  @override
+  Widget build(BuildContext context) {
+    if (value == 0) {
+      return Center(
+        child: Text(
+          '○',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.green.shade700,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+    }
+    if (value == null) {
+      return Center(
+        child: Text(
+          '✕',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.red.shade400,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+    }
+    return const SizedBox.shrink();
+  }
+}
+
+/// 指板：CustomPaint（无 child）+ Stack 圆点
+class _Fretboard extends StatelessWidget {
+  const _Fretboard({required this.fingerings});
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints c) {
+        final double w = c.maxWidth;
+        final double h = c.maxHeight;
+        return SizedBox(
+          width: w,
+          height: h,
+          child: Stack(
+            children: <Widget>[
+              // 底层：只画指板线（painter 没有 child，不会被缓存）
+              Positioned.fill(
+                child: CustomPaint(
+                  painter: _BoardPainter(),
+                ),
+              ),
+              // 顶层：圆点（独立 widget，每次 fingering 变就 rebuild）
+              ..._buildDots(w, h),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  List<Widget> _buildDots(double w, double h) {
+    // 4 列（弦）× 4 行（品位）
+    const double padX = 12.0;
+    const double padY = 12.0;
+    final double usableW = w - 2 * padX;
+    final double usableH = h - 2 * padY;
+    final double colW = usableW / 4;
+    final double rowH = usableH / 4;
+    // 圆点大小 = 不能超过格子高度的一半（否则会越界到相邻格子）
+    final double dotSize = (rowH * 0.4).clamp(8.0, colW * 0.7);
+
+    final List<Widget> dots = <Widget>[];
+    for (int s = 0; s < 4; s++) {
+      final int? fret = fingerings[s];
+      if (fret == null || fret == 0) continue; // 不弹 或 空弦（不画圆点）
+      if (fret < 1 || fret > 4) continue;
+
+      // 圆点中心：
+      // - x = 弦中心（骑在琴弦上）
+      // - y = 格子中线（两个品丝线之间）
+      //   视觉示意：圆点画在格子中间，不是骑在品丝线上
+      final double cx = padX + s * colW + colW / 2;
+      final double cy = padY + (fret - 0.5) * rowH;
+
+      dots.add(
+        Positioned(
+          left: cx - dotSize / 2,
+          top: cy - dotSize / 2,
+          child: Container(
+            width: dotSize,
+            height: dotSize,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.black87, // 参考图：黑色实心
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 2,
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              '$fret',
+              style: TextStyle(
+                fontSize: dotSize * 0.5,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return dots;
+  }
+}
+
+/// 指板画笔：4 根垂直琴弦 + 5 条水平品丝 + 顶部上弦枕
+class _BoardPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    const double padX = 12.0;
+    const double padY = 12.0;
+    final double usableW = size.width - 2 * padX;
+    final double usableH = size.height - 2 * padY;
+
+    final Paint stringPaint = Paint()
+      ..color = Colors.grey.shade700
+      ..strokeWidth = 1.5;
+    final Paint fretPaint = Paint()
+      ..color = Colors.grey.shade400
+      ..strokeWidth = 0.8;
+    final Paint nutPaint = Paint()
+      ..color = Colors.grey.shade900
+      ..strokeWidth = 3.0;
+
+    // 4 根琴弦（垂直线）
+    for (int s = 0; s < 4; s++) {
+      final double x = padX + (s / 3) * usableW;
+      canvas.drawLine(
+        Offset(x, padY),
+        Offset(x, size.height - padY),
+        stringPaint,
+      );
+    }
+
+    // 5 条品丝（水平线：顶部 0 品 + 1-4 品）
+    for (int f = 0; f <= 4; f++) {
+      final double y = padY + (f / 4) * usableH;
+      canvas.drawLine(
+        Offset(padX, y),
+        Offset(size.width - padX, y),
+        f == 0 ? nutPaint : fretPaint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter old) => true;
+}
+
+/// 底部弦标签：G C E A
+class _StringLabels extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 18,
+      child: Row(
+        children: const <Widget>[
+          Expanded(child: Center(child: _StrLabel('G'))),
+          Expanded(child: Center(child: _StrLabel('C'))),
+          Expanded(child: Center(child: _StrLabel('E'))),
+          Expanded(child: Center(child: _StrLabel('A'))),
+        ],
+      ),
+    );
+  }
+}
+
+class _StrLabel extends StatelessWidget {
+  const _StrLabel(this.text);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontSize: 12,
+        color: Colors.grey.shade600,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+}

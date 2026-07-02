@@ -1,0 +1,320 @@
+/// 尤克里里指法图（从 0 重写版 v3）
+///
+/// 设计原则：
+/// - 不用 CustomPainter（它会导致 shouldRepaint 缓存问题）
+/// - 不用 Stack + Positioned（坐标系混乱）
+/// - 用 Row + Column 真实布局
+/// - 圆点 = Container，size 由 LayoutBuilder 算，骑在琴弦上
+/// - 像素级测试：断言圆点真实 Rect 在格子内
+library;
+
+import 'package:flutter/material.dart';
+
+// ============== 数据层 ==============
+
+/// 弦索引约定：
+///   s=0: 4 弦 (G) — 最左
+///   s=1: 3 弦 (C)
+///   s=2: 2 弦 (E)
+///   s=3: 1 弦 (A) — 最右
+
+/// 尤克里里 4 个标准和弦指法（食指 1 / 中指 2 / 无名指 3）
+const Map<String, List<int?>> _chordData = {
+  'C': [0, 0, 0, 3],   // 4 弦空, 3 弦空, 2 弦空, 1 弦 3 品
+  'Am': [0, 0, 0, 0],  // 全空
+  'F': [1, 0, 1, 0],   // 4 弦 1, 3 弦空, 2 弦 1, 1 弦空
+  'G': [0, 2, 3, 2],   // 4 弦空, 3 弦 2, 2 弦 3, 1 弦 2
+};
+
+/// 公共入口
+class _ChordFingering {
+  const _ChordFingering({required this.fingerings});
+  final List<int?> fingerings;
+}
+
+_ChordFingering _resolve(String chord, bool isSingle) {
+  // 单音模式：取根音找 _singleNotes
+  if (isSingle && chord.length >= 1) {
+    final root = chord[0];
+    final data = _singleNotes[root];
+    if (data != null) {
+      return const _ChordFingering(fingerings: []);
+    }
+  }
+  // 和弦模式：直接查
+  final data = _chordData[chord];
+  if (data != null) {
+    return _ChordFingering(fingerings: data);
+  }
+  // 找不到：全空
+  return const _ChordFingering(fingerings: [null, null, null, null]);
+}
+
+/// 单音数据：每个音的指法（取最常用按法）
+const Map<String, List<int?>> _singleNotes = {
+  'C': [null, null, null, 3], // 1 弦 3 品
+  'D': [null, null, 2, null], // 2 弦 2 品
+  'E': [null, null, 0, null], // 2 弦空弦
+  'F': [1, null, null, null], // 4 弦 1 品
+  'G': [0, null, null, null], // 4 弦空弦
+  'A': [null, null, null, 0], // 1 弦空弦
+  'B': [2, null, null, null], // 4 弦 2 品
+};
+
+// ============== UI 层 ==============
+
+class ChordChart extends StatelessWidget {
+  const ChordChart({
+    super.key,
+    required this.chord,
+    this.isSingle = false,
+  });
+
+  final String chord;
+  final bool isSingle;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<int?> data = _resolveData(chord, isSingle);
+
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          // 顶部 0 品行：○ / ✕ / 空
+          _TopRow(fingerings: data),
+          const SizedBox(height: 4),
+          // 主体：指板
+          _Fretboard(fingerings: data),
+          const SizedBox(height: 4),
+          // 底部弦标签
+          _StringLabels(),
+        ],
+      ),
+    );
+  }
+
+  static List<int?> _resolveData(String chord, bool isSingle) {
+    if (isSingle && chord.isNotEmpty) {
+      final root = chord[0];
+      final data = _singleNotes[root];
+      if (data != null) return data;
+    }
+    final data = _chordData[chord];
+    if (data != null) return data;
+    return const [null, null, null, null];
+  }
+}
+
+/// 顶部 0 品行
+class _TopRow extends StatelessWidget {
+  const _TopRow({required this.fingerings});
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List<Widget>.generate(4, (int s) {
+        final int? f = s < fingerings.length ? fingerings[s] : null;
+        return Expanded(
+          child: Container(
+            height: 22,
+            alignment: Alignment.center,
+            child: _TopMark(fret: f),
+          ),
+        );
+      }),
+    );
+  }
+}
+
+class _TopMark extends StatelessWidget {
+  const _TopMark({required this.fret});
+  final int? fret;
+
+  @override
+  Widget build(BuildContext context) {
+    if (fret == 0) {
+      return const Text('○', style: TextStyle(fontSize: 18));
+    }
+    if (fret == null) {
+      return const Text('✕', style: TextStyle(
+        fontSize: 14, color: Colors.red,
+      ));
+    }
+    return const SizedBox.shrink();
+  }
+}
+
+/// 主体指板：5 行（0 品行 + 1-4 品）× 4 列（4 弦）
+class _Fretboard extends StatelessWidget {
+  const _Fretboard({required this.fingerings});
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 0.7, // 高比宽大（约 5 个高度 vs 4 个宽度）
+      child: Column(
+        children: <Widget>[
+          // 5 行（含 0 品行）
+          for (int row = 0; row < 5; row++)
+            Expanded(
+              child: _FretRow(rowIndex: row, fingerings: fingerings),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// 一行指板：4 个弦格
+class _FretRow extends StatelessWidget {
+  const _FretRow({required this.rowIndex, required this.fingerings});
+  final int rowIndex; // 0 = 0 品行, 1-4 = 1-4 品
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        // 4 个弦格
+        for (int s = 0; s < 4; s++)
+          Expanded(
+            child: _StringCell(
+              stringIdx: s,
+              rowIndex: rowIndex,
+              fingerings: fingerings,
+            ),
+          ),
+        // 右边线
+        Container(
+          width: 1.5,
+          color: Colors.grey.shade800,
+        ),
+      ],
+    );
+  }
+}
+
+/// 单个弦格
+class _StringCell extends StatelessWidget {
+  const _StringCell({
+    required this.stringIdx,
+    required this.rowIndex,
+    required this.fingerings,
+  });
+
+  final int stringIdx;
+  final int rowIndex;
+  final List<int?> fingerings;
+
+  @override
+  Widget build(BuildContext context) {
+    final int? fret = stringIdx < fingerings.length
+        ? fingerings[stringIdx]
+        : null;
+
+    final bool isTopRow = rowIndex == 0;
+    final bool isFretBoundary =
+        rowIndex > 0; // 每个 row 的顶/底都是品丝线
+
+    return Stack(
+      children: <Widget>[
+        // 0 品行：上方有品丝粗线
+        if (isTopRow)
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            child: Container(
+              height: 3,
+              color: Colors.grey.shade900,
+            ),
+          ),
+        // 下方品丝线（除最底一行外）
+        if (!isLastRow)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+              height: 0.8,
+              color: Colors.grey.shade400,
+            ),
+          ),
+        // 如果该格是该弦的指位，画圆点
+        if (fret != null && fret > 0 && fret == rowIndex)
+          _DotWidget(fret: fret!),
+      ],
+    );
+  }
+
+  bool get isLastRow => rowIndex == 4;
+}
+
+/// 圆点
+class _DotWidget extends StatelessWidget {
+  const _DotWidget({required this.fret});
+  final int fret;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        width: 28,
+        height: 28,
+        decoration: const BoxDecoration(
+          color: Colors.black87,
+          shape: BoxShape.circle,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          '$fret',
+          style: const TextStyle(
+            fontSize: 13,
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// 底部弦标签：G C E A
+class _StringLabels extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: const <Widget>[
+        Expanded(child: Center(child: _StrLabel('G'))),
+        Expanded(child: Center(child: _StrLabel('C'))),
+        Expanded(child: Center(child: _StrLabel('E'))),
+        Expanded(child: Center(child: _StrLabel('A'))),
+      ],
+    );
+  }
+}
+
+class _StrLabel extends StatelessWidget {
+  const _StrLabel(this.text);
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+}

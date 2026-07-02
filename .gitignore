@@ -1,0 +1,83 @@
+# Flutter
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/pubspec.lock
+**/pubspec.yaml.bak
+**/ios/Flutter/Generated.xcconfig
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/macos/Flutter/Generated.xcconfig
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/*.iml
+**/.idea/
+**/*.ipr
+**/*.iws
+**/local.properties
+**/.fvm/
+
+# Android
+**/.gradle/
+**/gradlew
+**/gradlew.bat
+**/gradle-wrapper.jar
+**/.cxx/
+**/android/.gradle/
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/key.properties
+*.jks
+*.keystore
+**/android/app/release/
+**/android/app/debug/
+
+# iOS/macOS
+**/Pods/
+**/Podfile.lock
+**/ios/Pods/
+**/ios/.symlinks/
+**/macos/Pods/
+**/*.mode1v3
+**/*.mode2v3
+**/*.mode3v3
+**/*.perspectivev3
+**/*.xcuserstate
+**/DerivedData/
+
+# Screenshots（开发临时）
+screenshots/
+build/
+
+# Python (server)
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.env
+**/venv/
+**/.venv/
+
+# IDE
+**/.vscode/
+**/.idea/
+**/*.swp
+**/*.swo
+**/Thumbs.db
+**/.DS_Store
+
+# Logs
+**/*.log
+**/expo-*.log
+**/static-*.log
+**/flutter_*.log
+
+# 临时文件
+**/.claude/
+**/tmp/
+**/temp/
