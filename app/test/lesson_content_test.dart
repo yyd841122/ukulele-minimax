@@ -5,8 +5,8 @@ import 'package:ukulele/features/course_center/lesson_content.dart';
 
 void main() {
   group('核心内容索引', () {
-    test('包含 6 节核心内容', () {
-      expect(kCoreLessonContent.length, 6);
+    test('包含 27 节核心内容（6 门课 × 4-6 节）', () {
+      expect(kCoreLessonContent.length, 27);
     });
 
     test('6 个 lesson id 都对应真实课程节', () {
@@ -27,7 +27,7 @@ void main() {
 
     test('hasCoreContent 函数正确', () {
       expect(hasCoreContent('intro-uke-1'), isTrue);
-      expect(hasCoreContent('intro-uke-2'), isFalse);
+      expect(hasCoreContent('intro-uke-2'), isTrue);
       expect(hasCoreContent('not-exist'), isFalse);
     });
 
