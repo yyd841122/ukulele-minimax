@@ -11,7 +11,9 @@ import '../features/sheets/sheets_page.dart';
 import '../features/sheets/sheet_detail_page.dart';
 import '../features/course_center/course_list_page.dart';
 import '../features/course_center/course_detail_page.dart';
+import '../features/course_center/lesson_content_page.dart';
 import '../features/ai_coach/ai_coach_page.dart';
+import '../features/discover/discover_page.dart';
 import 'constants.dart';
 import 'theme.dart';
 
@@ -64,10 +66,22 @@ final GoRouter appRouter = GoRouter(
           CourseDetailPage(courseId: state.pathParameters['id'] ?? ''),
     ),
     GoRoute(
+      path: AppRoutes.lessonContent,
+      name: 'lessonContent',
+      builder: (BuildContext context, GoRouterState state) =>
+          LessonContentPage(lessonId: state.pathParameters['id'] ?? ''),
+    ),
+    GoRoute(
       path: AppRoutes.aiCoach,
       name: 'aiCoach',
       builder: (BuildContext context, GoRouterState state) =>
           const AiCoachPage(),
+    ),
+    GoRoute(
+      path: AppRoutes.discover,
+      name: 'discover',
+      builder: (BuildContext context, GoRouterState state) =>
+          const DiscoverPage(),
     ),
   ],
 );

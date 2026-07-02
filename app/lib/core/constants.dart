@@ -38,5 +38,7 @@ class AppRoutes {
   static const String sheetDetail = '/sheets/:id';
   static const String courseCenter = '/courses';
   static const String courseCenterDetail = '/courses/:id';
+  static const String lessonContent = '/lessons/:id';
   static const String aiCoach = '/ai-coach';
+  static const String discover = '/discover';
 }

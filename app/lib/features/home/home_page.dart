@@ -69,18 +69,12 @@ class HomePage extends StatelessWidget {
                 title: '发现区',
                 subtitle: '学员成果',
                 color: Colors.cyan,
-                onTap: () => _showComingSoon(context, '发现区'),
+                onTap: () => context.push(AppRoutes.discover),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void _showComingSoon(BuildContext context, String name) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('$name：MVP 后续版本上线')),
     );
   }
 }

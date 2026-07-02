@@ -1,4 +1,4 @@
-/// 课程详情页（M04 占位版）
+/// 课程详情页（M04）
 library;
 
 import 'package:flutter/material.dart';
@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import 'course_data.dart';
 import 'course_model.dart';
+import 'lesson_content.dart';
 
 class CourseDetailPage extends StatelessWidget {
   const CourseDetailPage({super.key, required this.courseId});
@@ -262,12 +263,16 @@ class _LessonTile extends StatelessWidget {
           size: 26,
         ),
         onTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('MVP：${lesson.title} 内容待接入'),
-              duration: const Duration(seconds: 2),
-            ),
-          );
+          if (hasCoreContent(lesson.id)) {
+            context.push('/lessons/${lesson.id}');
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('MVP：${lesson.title} 内容待接入'),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          }
         },
       ),
     );
