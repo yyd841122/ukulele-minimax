@@ -4,6 +4,7 @@ library;
 import 'package:flutter/material.dart';
 
 import 'lesson_content.dart';
+import 'svg_illustrations.dart';
 
 /// 渲染 LessonBlock 列表
 class LessonContentRenderer extends StatelessWidget {
@@ -38,6 +39,9 @@ class _BlockView extends StatelessWidget {
     }
     if (block is StepListBlock) {
       return _StepListBlockView(block: block as StepListBlock);
+    }
+    if (block is SvgBlock) {
+      return _SvgBlockView(block: block as SvgBlock);
     }
     return const SizedBox.shrink();
   }
@@ -253,6 +257,79 @@ class _StepListBlockView extends StatelessWidget {
               ],
             ),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+// ============== SvgBlock 渲染（自绘示意图）==============
+class _SvgBlockView extends StatelessWidget {
+  const _SvgBlockView({required this.block});
+  final SvgBlock block;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget svg;
+    switch (block.svgType) {
+      case SvgType.fretboard:
+        svg = UkuleleFretboardSvg(
+          dots: block.dots,
+          showFrets: block.showFrets,
+        );
+        break;
+      case SvgType.handGrip:
+        svg = const HandGripSvg();
+        break;
+      case SvgType.pima:
+        svg = const PimaFingersSvg();
+        break;
+      case SvgType.barre:
+        svg = BarreChordSvg(
+          barreStrings: block.barreStrings,
+          otherFingers: block.otherFingers,
+        );
+        break;
+      case SvgType.tuner:
+        svg = TunerScreenSvg(
+          noteName: block.noteName,
+          cents: block.cents,
+        );
+        break;
+    }
+
+    // SVG + 图说（白底）
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFFFAFAFA),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFFE0E0E0)),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SizedBox(
+            height: 180,
+            child: svg,
+          ),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: const Color(0xFFEEEEEE),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Text(
+              block.caption,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF424242),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
         ],
       ),
     );

@@ -6,8 +6,13 @@ library;
 
 import 'package:flutter/material.dart';
 
+import 'svg_illustrations.dart';
+
 /// 文本样式类型
 enum LessonTextStyle { title, body, tip, warn }
+
+/// SVG 示意图类型（参考 svg_illustrations.dart）
+enum SvgType { fretboard, handGrip, pima, barre, tuner }
 
 /// 图文块基类（sealed：text/image/stepList）
 sealed class LessonBlock {
@@ -42,6 +47,42 @@ class StepListBlock extends LessonBlock {
   final List<LessonStep> steps;
 }
 
+/// SVG 自绘示意图块
+class SvgBlock extends LessonBlock {
+  const SvgBlock({
+    required this.svgType,
+    required this.caption,
+    this.dots = const <Map<String, dynamic>>[],
+    this.barreStrings = const <int>[2, 3],
+    this.otherFingers = const <Map<String, dynamic>>[],
+    this.noteName = 'A',
+    this.cents = 0,
+    this.showFrets = 4,
+  });
+  final SvgType svgType;
+
+  /// 4 弦指板高亮圆点（仅 fretboard 模式）
+  final List<Map<String, dynamic>> dots;
+
+  /// 横按弦号（仅 barre 模式）
+  final List<int> barreStrings;
+
+  /// 其他手指（仅 barre 模式）
+  final List<Map<String, dynamic>> otherFingers;
+
+  /// 调音器当前音名（仅 tuner 模式）
+  final String noteName;
+
+  /// 调音器 cents 偏移（仅 tuner 模式，-50~+50）
+  final int cents;
+
+  /// 指板显示几品（仅 fretboard 模式）
+  final int showFrets;
+
+  /// 图说文字
+  final String caption;
+}
+
 class LessonStep {
   const LessonStep(this.index, this.text);
   final int index;
@@ -60,10 +101,10 @@ final List<LessonBlock> kIntroUke1 = <LessonBlock>[
   const TextBlock(
     '尤克里里（ukulele）是来自夏威夷的小型四弦琴，音色清脆活泼，入门门槛低，是很多人接触音乐的第一件乐器。',
   ),
-  const ImageBlock(
-    emoji: '🎸',
-    gradient: <Color>[Color(0xFFFFB74D), Color(0xFFFF8A65)],
+  const SvgBlock(
+    svgType: SvgType.fretboard,
     caption: '标准 21 品 soprano 尤克里里（约 53 cm）',
+    showFrets: 4,
   ),
   const TextBlock('4 根弦的音名（从左到右）'),
   const StepListBlock(steps: <LessonStep>[
@@ -125,10 +166,21 @@ final List<LessonBlock> kFirstChord1 = <LessonBlock>[
   const TextBlock(
     '这 4 个和弦可以演奏超过 70% 的流行歌曲，号称"万能四和弦"。掌握它们就能弹唱大量入门曲目。',
   ),
-  const ImageBlock(
-    emoji: '🎵',
-    gradient: <Color>[Color(0xFF66BB6A), Color(0xFFA5D6A7)],
+  const SvgBlock(
+    svgType: SvgType.fretboard,
     caption: 'C → Am → F → G 是流行乐的经典进行',
+    dots: <Map<String, dynamic>>[
+      // C: 无名指 1 弦 3 品
+      <String, dynamic>{'string': 3, 'fret': 3, 'finger': 3},
+      // Am: 全空
+      // F: 食指 4 弦 1 品 + 中指 2 弦 1 品（简化版）
+      <String, dynamic>{'string': 0, 'fret': 1, 'finger': 1},
+      <String, dynamic>{'string': 2, 'fret': 1, 'finger': 2},
+      // G: 4 弦开弦 + 食指 3 弦 2 品 + 中指 2 弦 3 品 + 无名指 1 弦 2 品
+      <String, dynamic>{'string': 1, 'fret': 2, 'finger': 1},
+      <String, dynamic>{'string': 2, 'fret': 3, 'finger': 2},
+      <String, dynamic>{'string': 3, 'fret': 2, 'finger': 3},
+    ],
   ),
   const TextBlock('4 个和弦的音名组成'),
   const StepListBlock(
@@ -162,9 +214,8 @@ final List<LessonBlock> kStrumming1 = <LessonBlock>[
   const TextBlock(
     '右手扫弦最基础的两个动作：向下扫（Down）和向上扫（Up）。所有复杂节奏型都是这两个动作的组合。',
   ),
-  const ImageBlock(
-    emoji: '🎯',
-    gradient: <Color>[Color(0xFF42A5F5), Color(0xFF64B5F6)],
+  const SvgBlock(
+    svgType: SvgType.handGrip,
     caption: '右手拇指与食指轻握拨片，腕部发力',
   ),
   const TextBlock('拨片握法'),
@@ -198,10 +249,14 @@ final List<LessonBlock> kBarre1 = <LessonBlock>[
   const TextBlock(
     '横按（Barre Chords）是尤克里里进阶的"门槛"——食指同时按住多根弦。掌握后可以弹出几乎所有和弦。',
   ),
-  const ImageBlock(
-    emoji: '💪',
-    gradient: <Color>[Color(0xFFEF5350), Color(0xFFFF8A80)],
+  const SvgBlock(
+    svgType: SvgType.barre,
     caption: '食指侧边（不是指腹）压在品丝正后方',
+    barreStrings: <int>[2, 3],
+    otherFingers: <Map<String, dynamic>>[
+      <String, dynamic>{'string': 3, 'fret': 2, 'finger': '中'},
+      <String, dynamic>{'string': 4, 'fret': 2, 'finger': '无'},
+    ],
   ),
   const TextBlock('横按的 3 个核心要点'),
   const StepListBlock(
@@ -240,9 +295,8 @@ final List<LessonBlock> kFingerstyle1 = <LessonBlock>[
   const TextBlock(
     '指弹（Fingerstyle）是不用拨片，用手指直接拨弦。右手 4 个手指各有分工，国际通用名称是 PIMA。',
   ),
-  const ImageBlock(
-    emoji: '🖐️',
-    gradient: <Color>[Color(0xFF7E57C2), Color(0xFFB39DDB)],
+  const SvgBlock(
+    svgType: SvgType.pima,
     caption: '右手 4 指分工：P=拇指 I=食指 M=中指 A=无名指',
   ),
   const TextBlock('4 指分工'),
@@ -329,10 +383,11 @@ final List<LessonBlock> kIntroUke2 = <LessonBlock>[
   const TextBlock(
     '新琴买回来，第一件事就是调弦。音不准，弹什么都会难听。标准调弦下，从第 4 弦到第 1 弦依次是 G-C-E-A，所以叫"四弦 GCEA"。',
   ),
-  const ImageBlock(
-    emoji: '🎼',
-    gradient: <Color>[Color(0xFF26A69A), Color(0xFF80CBC4)],
+  const SvgBlock(
+    svgType: SvgType.tuner,
     caption: '从左到右（从粗到细）：G - C - E - A',
+    noteName: 'G',
+    cents: -15,
   ),
   const TextBlock('调弦前的准备'),
   const StepListBlock(
@@ -365,9 +420,8 @@ final List<LessonBlock> kIntroUke3 = <LessonBlock>[
   const TextBlock(
     '持琴姿势直接影响弹奏手感和长时间练习的舒适度。错误姿势会导致手腕酸痛、按弦无力。',
   ),
-  const ImageBlock(
-    emoji: '🧘',
-    gradient: <Color>[Color(0xFF7986CB), Color(0xFF9FA8DA)],
+  const SvgBlock(
+    svgType: SvgType.handGrip,
     caption: '右手前臂搭在琴身上方约 1/3 处',
   ),
   const TextBlock('右手持琴'),

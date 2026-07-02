@@ -59,10 +59,10 @@ void main() {
       }
     });
 
-    test('每节包含至少 1 个 ImageBlock', () {
+    test('每节包含至少 1 个 ImageBlock 或 SvgBlock', () {
       for (final entry in kCoreLessonContent.entries) {
-        final hasImage = entry.value.any((b) => b is ImageBlock);
-        expect(hasImage, isTrue, reason: '${entry.key} 应有 ImageBlock');
+        final hasImage = entry.value.any((b) => b is ImageBlock || b is SvgBlock);
+        expect(hasImage, isTrue, reason: '${entry.key} 应有 ImageBlock 或 SvgBlock');
       }
     });
 
@@ -110,6 +110,55 @@ void main() {
             }
           }
         }
+      }
+    });
+
+    test('SvgBlock caption 非空且 svgType 有效', () {
+      for (final entry in kCoreLessonContent.entries) {
+        for (final b in entry.value) {
+          if (b is SvgBlock) {
+            expect(b.caption.isNotEmpty, isTrue);
+            expect(SvgType.values.contains(b.svgType), isTrue);
+          }
+        }
+      }
+    });
+  });
+
+  group('SvgBlock 覆盖', () {
+    test('6 门课的关键图至少 7 处用 SvgBlock 替换占位', () {
+      int count = 0;
+      for (final entry in kCoreLessonContent.entries) {
+        for (final b in entry.value) {
+          if (b is SvgBlock) count++;
+        }
+      }
+      expect(count, greaterThanOrEqualTo(7),
+          reason: '应该至少有 7 处 SvgBlock 替换原占位');
+    });
+
+    test('fretboard 模式至少 2 处使用（intro-uke-1 + first-chord-prog-1）', () {
+      int fretCount = 0;
+      for (final entry in kCoreLessonContent.entries) {
+        for (final b in entry.value) {
+          if (b is SvgBlock && b.svgType == SvgType.fretboard) {
+            fretCount++;
+          }
+        }
+      }
+      expect(fretCount, greaterThanOrEqualTo(2));
+    });
+
+    test('所有 5 种 SvgType 都至少被使用一次', () {
+      final Set<SvgType> used = <SvgType>{};
+      for (final entry in kCoreLessonContent.entries) {
+        for (final b in entry.value) {
+          if (b is SvgBlock) used.add(b.svgType);
+        }
+      }
+      for (final t in SvgType.values) {
+        expect(used.contains(t), isTrue,
+            reason: '$t 至少应被使用一次');
       }
     });
   });
